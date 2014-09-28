@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22013.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Tchernobyl", "src\Tchernobyl\Tchernobyl.kproj", "{C38F8A03-CF20-497D-A4BD-07C261599DA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E29EAFAF-8BA0-4498-A084-4856D0EC7578}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{1BC85ABC-30D0-45D6-AAF6-405C52BE98AC}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Tchernobyl.Sample", "samples\Tchernobyl.Sample\Tchernobyl.Sample.kproj", "{31D5C103-2FB1-4DB8-8883-D79693B96130}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C38F8A03-CF20-497D-A4BD-07C261599DA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C38F8A03-CF20-497D-A4BD-07C261599DA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C38F8A03-CF20-497D-A4BD-07C261599DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C38F8A03-CF20-497D-A4BD-07C261599DA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31D5C103-2FB1-4DB8-8883-D79693B96130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31D5C103-2FB1-4DB8-8883-D79693B96130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31D5C103-2FB1-4DB8-8883-D79693B96130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31D5C103-2FB1-4DB8-8883-D79693B96130}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C38F8A03-CF20-497D-A4BD-07C261599DA0} = {E29EAFAF-8BA0-4498-A084-4856D0EC7578}
+		{31D5C103-2FB1-4DB8-8883-D79693B96130} = {1BC85ABC-30D0-45D6-AAF6-405C52BE98AC}
+	EndGlobalSection
+EndGlobal
