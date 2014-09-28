@@ -14,15 +14,15 @@ namespace Tchernobyl {
         private readonly ITypeActivator _typeActivator;
 
         public TchernobylConvention(
-            [NotNull] IControllerAssemblyProvider assemblyProvider,
-            [NotNull] IServiceProvider serviceProvider,
-            [NotNull] ITypeActivator typeActivator) {
+            IControllerAssemblyProvider assemblyProvider,
+            IServiceProvider serviceProvider,
+            ITypeActivator typeActivator) {
             _assemblyProvider = assemblyProvider;
             _serviceProvider = serviceProvider;
             _typeActivator = typeActivator;
         }
 
-        protected virtual MethodInfo FindInitializer([NotNull] Type type) {
+        protected virtual MethodInfo FindInitializer(Type type) {
             foreach (var method in type.GetMethods()) {
                 // Exclude methods whose name is not "GetRoutes".
                 if (!string.Equals(method.Name, "GetRoutes", StringComparison.OrdinalIgnoreCase)) {
