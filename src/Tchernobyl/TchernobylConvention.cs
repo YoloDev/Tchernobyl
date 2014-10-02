@@ -60,7 +60,10 @@ namespace Tchernobyl {
                     continue;
                 }
 
-                var controller = new ReflectedControllerModel(typeInfo);
+                var controller = new ReflectedControllerModel(typeInfo) {
+                    Application = model
+                };
+
                 var prototype = _typeActivator.CreateInstance(_serviceProvider, typeInfo.AsType());
 
                 // Make sure to dispose the prototype.
@@ -80,6 +83,7 @@ namespace Tchernobyl {
                         var action = new ReflectedActionModel(method) {
                             ActionName = method.Name,
                             AttributeRouteModel = new ReflectedAttributeRouteModel { Template = operation.Item1 },
+                            Controller = controller,
                             HttpMethods = { operation.Item2 }
                         };
 
@@ -89,6 +93,7 @@ namespace Tchernobyl {
                             }
 
                             action.Parameters.Add(new ReflectedParameterModel(parameter) {
+                                Action = action,
                                 IsOptional = parameter.IsOptional,
                                 ParameterName = parameter.Name
                             });
