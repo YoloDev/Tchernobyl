@@ -46,7 +46,7 @@ namespace Tchernobyl {
             return null;
         }
 
-        public void OnModelCreated([NotNull] ReflectedApplicationModel model) {
+        public void Apply([NotNull] ReflectedApplicationModel model) {
             foreach (var typeInfo in from assembly in _assemblyProvider.CandidateAssemblies
                                      from type in assembly.GetExportedTypes()
                                      select type.GetTypeInfo()) {
