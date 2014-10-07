@@ -109,6 +109,31 @@ namespace Tchernobyl {
         }
 
 
+        public static dynamic Get<TArg1, TArg2, TArg3, TArg4>(string route, Action<TArg1, TArg2, TArg3, TArg4> action, params IFilter[] filters) {
+            return Get(route, filters, action as Delegate);
+        }
+
+        public static dynamic Get<TArg1, TArg2, TArg3, TArg4>(string route, Func<TArg1, TArg2, TArg3, TArg4, Task> action, params IFilter[] filters) {
+            return Get(route, filters, action as Delegate);
+        }
+
+        public static dynamic Get<TArg1, TArg2, TArg3, TArg4>(string route, Func<TArg1, TArg2, TArg3, TArg4, IActionResult> action, params IFilter[] filters) {
+            return Get(route, filters, action as Delegate);
+        }
+
+        public static dynamic Get<TArg1, TArg2, TArg3, TArg4>(string route, Func<TArg1, TArg2, TArg3, TArg4, Task<IActionResult>> action, params IFilter[] filters) {
+            return Get(route, filters, action as Delegate);
+        }
+
+        public static dynamic Get<TArg1, TArg2, TArg3, TArg4, TResult>(string route, Func<TArg1, TArg2, TArg3, TArg4, TResult> action, params IFilter[] filters) {
+            return Get(route, filters, action as Delegate);
+        }
+
+        public static dynamic Get<TArg1, TArg2, TArg3, TArg4, TResult>(string route, Func<TArg1, TArg2, TArg3, TArg4, Task<TResult>> action, params IFilter[] filters) {
+            return Get(route, filters, action as Delegate);
+        }
+
+
 
         public static dynamic Post(string route, IEnumerable<IFilter> filters, Delegate action) {
             return Tuple.Create(route, "POST", filters, action);
@@ -211,6 +236,31 @@ namespace Tchernobyl {
         }
 
         public static dynamic Post<TArg1, TArg2, TArg3, TResult>(string route, Func<TArg1, TArg2, TArg3, Task<TResult>> action, params IFilter[] filters) {
+            return Post(route, filters, action as Delegate);
+        }
+
+
+        public static dynamic Post<TArg1, TArg2, TArg3, TArg4>(string route, Action<TArg1, TArg2, TArg3, TArg4> action, params IFilter[] filters) {
+            return Post(route, filters, action as Delegate);
+        }
+
+        public static dynamic Post<TArg1, TArg2, TArg3, TArg4>(string route, Func<TArg1, TArg2, TArg3, TArg4, Task> action, params IFilter[] filters) {
+            return Post(route, filters, action as Delegate);
+        }
+
+        public static dynamic Post<TArg1, TArg2, TArg3, TArg4>(string route, Func<TArg1, TArg2, TArg3, TArg4, IActionResult> action, params IFilter[] filters) {
+            return Post(route, filters, action as Delegate);
+        }
+
+        public static dynamic Post<TArg1, TArg2, TArg3, TArg4>(string route, Func<TArg1, TArg2, TArg3, TArg4, Task<IActionResult>> action, params IFilter[] filters) {
+            return Post(route, filters, action as Delegate);
+        }
+
+        public static dynamic Post<TArg1, TArg2, TArg3, TArg4, TResult>(string route, Func<TArg1, TArg2, TArg3, TArg4, TResult> action, params IFilter[] filters) {
+            return Post(route, filters, action as Delegate);
+        }
+
+        public static dynamic Post<TArg1, TArg2, TArg3, TArg4, TResult>(string route, Func<TArg1, TArg2, TArg3, TArg4, Task<TResult>> action, params IFilter[] filters) {
             return Post(route, filters, action as Delegate);
         }
     }

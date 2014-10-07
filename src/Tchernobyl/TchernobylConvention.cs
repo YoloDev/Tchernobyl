@@ -4,19 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.ReflectedModelBuilder;
+using Microsoft.AspNet.Mvc.ApplicationModel;
 using Microsoft.Framework.DependencyInjection;
 
 namespace Tchernobyl {
-    public class TchernobylConvention : IReflectedApplicationModelConvention {
+    public class TchernobylConvention : IGlobalModelConvention {
         private readonly IControllerAssemblyProvider _assemblyProvider;
         private readonly IServiceProvider _serviceProvider;
         private readonly ITypeActivator _typeActivator;
 
         public TchernobylConvention(
-            IControllerAssemblyProvider assemblyProvider,
-            IServiceProvider serviceProvider,
-            ITypeActivator typeActivator) {
+            [NotNull] IControllerAssemblyProvider assemblyProvider,
+            [NotNull] IServiceProvider serviceProvider,
+            [NotNull] ITypeActivator typeActivator) {
             _assemblyProvider = assemblyProvider;
             _serviceProvider = serviceProvider;
             _typeActivator = typeActivator;
@@ -46,7 +46,7 @@ namespace Tchernobyl {
             return null;
         }
 
-        public void Apply([NotNull] ReflectedApplicationModel model) {
+        public void Apply([NotNull] GlobalModel model) {
             foreach (var typeInfo in from assembly in _assemblyProvider.CandidateAssemblies
                                      from type in assembly.GetExportedTypes()
                                      select type.GetTypeInfo()) {
@@ -60,7 +60,7 @@ namespace Tchernobyl {
                     continue;
                 }
 
-                var controller = new ReflectedControllerModel(typeInfo) {
+                var controller = new ControllerModel(typeInfo) {
                     Application = model
                 };
 
@@ -80,9 +80,9 @@ namespace Tchernobyl {
 
                         var method = operation.Item4.GetMethodInfo();
 
-                        var action = new ReflectedActionModel(method) {
+                        var action = new ActionModel(method) {
                             ActionName = method.Name,
-                            AttributeRouteModel = new ReflectedAttributeRouteModel { Template = operation.Item1 },
+                            AttributeRouteModel = new AttributeRouteModel { Template = operation.Item1 },
                             Controller = controller,
                             HttpMethods = { operation.Item2 }
                         };
@@ -92,7 +92,7 @@ namespace Tchernobyl {
                                 throw new NotSupportedException(Resources.Convention_OptimizedAnonymousMethodUnsupported);
                             }
 
-                            action.Parameters.Add(new ReflectedParameterModel(parameter) {
+                            action.Parameters.Add(new ParameterModel(parameter) {
                                 Action = action,
                                 IsOptional = parameter.IsOptional,
                                 ParameterName = parameter.Name
