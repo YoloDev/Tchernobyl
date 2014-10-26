@@ -7,7 +7,7 @@ namespace Tchernobyl {
         public static IServiceCollection AddTchernobyl(
             [NotNull] this IServiceCollection services,
             [NotNull] Func<IServiceProvider> serviceProviderLocator) {
-            return services.SetupOptions<MvcOptions>(options => {
+            return services.Configure<MvcOptions>(options => {
                 var serviceProvider = serviceProviderLocator();
                 if (serviceProvider == null) {
                     throw new InvalidOperationException(Resources.Extensions_ServiceProviderLocatorInvalid);
@@ -16,7 +16,7 @@ namespace Tchernobyl {
                 options.ApplicationModelConventions.Add(new TchernobylConvention(
                     serviceProvider: serviceProvider,
                     typeActivator: serviceProvider.GetService<ITypeActivator>(),
-                    assemblyProvider: serviceProvider.GetService<IControllerAssemblyProvider>()));
+                    assemblyProvider: serviceProvider.GetService<IAssemblyProvider>()));
             });
         }
     }

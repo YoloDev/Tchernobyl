@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.ApplicationModel;
+using Microsoft.AspNet.Mvc.ApplicationModels;
 using Microsoft.Framework.DependencyInjection;
 
 namespace Tchernobyl {
-    public class TchernobylConvention : IGlobalModelConvention {
-        private readonly IControllerAssemblyProvider _assemblyProvider;
+    public class TchernobylConvention : IApplicationModelConvention {
+        private readonly IAssemblyProvider _assemblyProvider;
         private readonly IServiceProvider _serviceProvider;
         private readonly ITypeActivator _typeActivator;
 
         public TchernobylConvention(
-            [NotNull] IControllerAssemblyProvider assemblyProvider,
+            [NotNull] IAssemblyProvider assemblyProvider,
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] ITypeActivator typeActivator) {
             _assemblyProvider = assemblyProvider;
@@ -46,7 +46,7 @@ namespace Tchernobyl {
             return null;
         }
 
-        public void Apply([NotNull] GlobalModel model) {
+        public void Apply([NotNull] ApplicationModel application) {
             foreach (var typeInfo in from assembly in _assemblyProvider.CandidateAssemblies
                                      from type in assembly.GetExportedTypes()
                                      select type.GetTypeInfo()) {
@@ -61,7 +61,7 @@ namespace Tchernobyl {
                 }
 
                 var controller = new ControllerModel(typeInfo) {
-                    Application = model
+                    Application = application
                 };
 
                 var prototype = _typeActivator.CreateInstance(_serviceProvider, typeInfo.AsType());
@@ -104,7 +104,7 @@ namespace Tchernobyl {
                         controller.Actions.Add(action);
                     }
 
-                    model.Controllers.Add(controller);
+                    application.Controllers.Add(controller);
                 }
             }
         }
